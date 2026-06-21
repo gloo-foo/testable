@@ -2,7 +2,7 @@ module github.com/gloo-foo/testable
 
 go 1.26.4
 
-require github.com/gloo-foo/framework v0.0.6
+require github.com/gloo-foo/framework v0.0.7
 
 require (
 	4d63.com/gocheckcompilerdirectives v1.3.0 // indirect
@@ -159,6 +159,7 @@ require (
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/davidmz/go-pageant v1.0.2 // indirect
 	github.com/denis-tingaikin/go-header v0.5.0 // indirect
+	github.com/destel/rill v0.8.1 // indirect
 	github.com/dghubble/go-twitter v0.0.0-20211115160449-93a8679adecb // indirect
 	github.com/dghubble/oauth1 v0.7.3 // indirect
 	github.com/dghubble/sling v1.4.0 // indirect
