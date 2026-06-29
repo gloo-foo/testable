@@ -19,8 +19,8 @@ import (
 
 // Result holds the captured output and error from a command execution.
 type Result struct {
-	Stdout []string // Output lines (the command's output stream)
-	Err    error    // First error carried by the stream, if any
+	Err    error
+	Stdout []string
 }
 
 // Runner configures and executes a command for testing. Every With* method

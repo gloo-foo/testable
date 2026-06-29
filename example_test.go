@@ -6,6 +6,7 @@ import (
 
 	gloo "github.com/gloo-foo/framework"
 	"github.com/gloo-foo/framework/patterns"
+
 	"github.com/gloo-foo/testable"
 )
 

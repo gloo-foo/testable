@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	gloo "github.com/gloo-foo/framework"
+
 	"github.com/gloo-foo/testable/run"
 )
 
@@ -24,8 +25,8 @@ func Test(cmd gloo.Command[[]byte, []byte], input string) (string, error) {
 	}
 	var b strings.Builder
 	for _, line := range res.Stdout {
-		b.WriteString(line)
-		b.WriteByte('\n')
+		_, _ = b.WriteString(line)
+		_ = b.WriteByte('\n')
 	}
 	return b.String(), nil
 }

@@ -8,8 +8,8 @@ import (
 // spy is a reporter that records calls instead of failing a test, so the
 // failure branches of every assertion helper are reachable and verifiable.
 type spy struct {
-	helperCalls int
 	errors      []string
+	helperCalls int
 }
 
 func (s *spy) Helper() { s.helperCalls++ }
