@@ -2,14 +2,15 @@
 // Command[[]byte, []byte] against in-memory input and returns the captured
 // output, so a command can be tested without touching real files or I/O.
 //
-// Test and TestLines are the convenience entry points used by the cmd-* modules;
-// both delegate execution to the run subpackage, which offers a fluent Runner
-// for finer control (custom readers, injected read errors, an explicit context).
+// Test and TestLines are the convenience entry points used by the cmd-* modules.
+// They delegate to the fn package — the production adapter that runs a command as
+// an ordinary data function — so a command behaves identically under test and in
+// use. The run subpackage offers a fluent Runner for finer control (custom
+// readers, injected read errors, an explicit context).
 package testable
 
 import (
-	"strings"
-
+	"github.com/gloo-foo/fn"
 	gloo "github.com/gloo-foo/framework"
 
 	"github.com/gloo-foo/testable/run"
@@ -19,24 +20,11 @@ import (
 // string, each output line terminated by '\n'. On command failure it returns the
 // error and an empty string.
 func Test(cmd gloo.Command[[]byte, []byte], input run.Input) (string, error) {
-	res := run.WithInput(cmd, input)
-	if res.Err != nil {
-		return "", res.Err
-	}
-	var b strings.Builder
-	for _, line := range res.Stdout {
-		_, _ = b.WriteString(line)
-		_ = b.WriteByte('\n')
-	}
-	return b.String(), nil
+	return fn.Of(cmd).String(string(input))
 }
 
 // TestLines runs cmd with the given input and returns its captured stdout as
 // lines. On command failure it returns the error and a nil slice.
 func TestLines(cmd gloo.Command[[]byte, []byte], input run.Input) ([]string, error) {
-	res := run.WithInput(cmd, input)
-	if res.Err != nil {
-		return nil, res.Err
-	}
-	return res.Stdout, nil
+	return fn.Of(cmd).Lines([]byte(input))
 }
